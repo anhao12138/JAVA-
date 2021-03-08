@@ -9,6 +9,7 @@ import util.JDBCUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -57,8 +58,20 @@ public class StudentDaoTest {
 
     @Test
     public void selectList() {
-        Student student = new Student();
-        Student select = studentDao.select(12);
-        System.out.println(select.toString());
+        List<Student>studentList = studentDao.selectList();
+//        foreach,循环
+        for (Student student:studentList){
+            System.out.println(student);
+        }
+//        for,循环
+        for (int i=0; i<studentList.size();i++){
+            Student student = studentList.get(i);
+        }
+//        迭代器遍历
+        Iterator<Student> iterator = studentList.iterator();
+        while (iterator.hasNext()){
+            Student student=iterator.next();
+            System.out.println(student);
+        }
     }
 }
